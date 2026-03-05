@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>结伴蛙 PRD 产品需求文档</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.8;
+    }
+    header {
+      background: linear-gradient(135deg, #4CAF50, #81C784);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 { font-size: 2.2em; letter-spacing: 4px; }
+    header p { margin-top: 8px; opacity: 0.9; font-size: 1.1em; }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 4px 16px;
+      margin-top: 12px;
+      font-size: 0.85em;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .section-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #2e7d32;
+      border-left: 4px solid #4CAF50;
+      padding-left: 12px;
+      margin-bottom: 18px;
+    }
+    .section-title .num {
+      display: inline-block;
+      background: #4CAF50;
+      color: white;
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      line-height: 26px;
+      text-align: center;
+      font-size: 0.8em;
+      margin-right: 8px;
+    }
+    h3 { color: #388e3c; margin: 16px 0 8px; font-size: 1em; }
+    p { margin: 8px 0; }
+    ul, ol { padding-left: 20px; margin: 8px 0; }
+    li { margin: 6px 0; }
+    .quote {
+      background: #f1f8e9;
+      border-left: 4px solid #8bc34a;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+      font-style: italic;
+      color: #555;
+    }
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .tag {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.88em;
+      border: 1px solid #c8e6c9;
+    }
+    .tag.blue { background: #e3f2fd; color: #1565c0; border-color: #bbdefb; }
+    .tag.orange { background: #fff3e0; color: #e65100; border-color: #ffe0b2; }
+    .tag.red { background: #fce4ec; color: #c62828; border-color: #f8bbd0; }
+
+    /* 卡片预览 */
+    .card-preview {
+      max-width: 340px;
+      margin: 20px auto;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      overflow: hidden;
+      background: white;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      padding: 18px 18px 12px;
+      gap: 14px;
+    }
+    .card-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a5d6a7, #66bb6a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2em;
+      flex-shrink: 0;
+    }
+    .card-title-block { flex: 1; }
+    .card-title-block .name { font-size: 1.15em; font-weight: bold; }
+    .card-title-block .sub { color: #888; font-size: 0.82em; margin-top: 2px; }
+    .card-tags {
+      padding: 0 18px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .card-tag-row {
+      display: flex;
+      gap: 7px;
+    }
+    .card-pill {
+      flex: 1;
+      border-radius: 20px;
+      padding: 6px 10px;
+      font-size: 0.8em;
+      text-align: center;
+      font-weight: 500;
+    }
+    .card-pill.yellow { background: #fff9c4; color: #f57f17; border: 1.5px solid #ffe082; }
+    .card-pill.teal  { background: #e0f2f1; color: #00695c; border: 1.5px solid #80cbc4; }
+    .card-price {
+      padding: 10px 18px;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .card-price span { color: #e53935; font-weight: bold; font-size: 1.1em; }
+    .card-actions {
+      display: flex;
+      border-top: 1px solid #f0f0f0;
+    }
+    .card-actions button {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      background: none;
+      font-size: 0.95em;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .card-actions button.collect { color: #fb8c00; border-right: 1px solid #f0f0f0; }
+    .card-actions button.draw { color: #4CAF50; }
+    .card-nav {
+      display: flex;
+      justify-content: space-around;
+      background: #fafafa;
+      border-top: 1px solid #eee;
+      padding: 10px 0;
+      font-size: 0.82em;
+      color: #888;
+    }
+    .card-nav span.active { color: #4CAF50; font-weight: bold; }
+
+    /* 用户等级表 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 0.92em;
+    }
+    th {
+      background: #4CAF50;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; }
+    tr:nth-child(even) td { background: #f9f9f9; }
+    tr:last-child td { border-bottom: none; }
+
+    /* 评级系统 */
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .rank-card {
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .rank-iron   { background: #37474f; color: #cfd8dc; }
+    .rank-silver { background: #90a4ae; color: white; }
+    .rank-gold   { background: linear-gradient(135deg, #ffd54f, #ffca28); color: #5d4037; }
+    .rank-king   { background: linear-gradient(135deg, #ce93d8, #ab47bc); color: white; }
+    .rank-card small { display: block; font-size: 0.75em; font-weight: normal; margin-top: 4px; opacity: 0.85; }
+
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 10px 0;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 36px;
+      bottom: -10px;
+      width: 2px;
+      background: #c8e6c9;
+    }
+    .step-num {
+      width: 30px; height: 30px;
+      background: #4CAF50;
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85em;
+      font-weight: bold;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-content { flex: 1; padding-top: 4px; }
+
+    .highlight-box {
+      background: #fff3e0;
+      border: 1.5px solid #ffcc80;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0;
+    }
+    .highlight-box.red {
+      background: #fce4ec;
+      border-color: #f48fb1;
+    }
+    .highlight-box.blue {
+      background: #e3f2fd;
+      border-color: #90caf9;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .kpi-item {
+      background: #f1f8e9;
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+    }
+    .kpi-item .kpi-icon { font-size: 1.6em; }
+    .kpi-item .kpi-label { font-size: 0.82em; color: #666; margin-top: 4px; }
+    .kpi-item .kpi-name { font-weight: bold; color: #2e7d32; font-size: 0.95em; margin-top: 2px; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #999;
+      font-size: 0.85em;
+    }
+    .updated { color: #aaa; font-size: 0.82em; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🐸 结伴蛙</h1>
+  <p>产品需求文档 · Product Requirements Document</p>
+  <div class="badge">v0.2 · 持续更新中</div>
+</header>
+
+<div class="container">
+
+  <!-- 1. 背景与愿景 -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span>创立背景与产品愿景</div>
+    <div class="quote">
+      在这个被互联网高速重塑的时代，我们的生活被前所未有的便捷所包围。<br>
+      信息触手可及，沟通瞬间完成，世界仿佛被压缩进一块小小的屏幕之中。<br>
+      可当我们低头滑动手机的时间越来越长，抬头看见彼此的时间却越来越少。<br><br>
+      冷漠，不是因为人心变了，<br>
+      而是因为我们太久没有真实地相遇。
+    </div>
+    <p>我们的使命：<strong>让线下重逢，让温度回归，让人与人重新连接。</strong></p>
+    <p>把未被满足的出行需求和闲置的人力资源高效匹配，为用户创造价值。</p>
+    <h3>短期目标</h3>
+    <ul>
+      <li>建立基础匹配与支付流程</li>
+      <li>获取首批种子用户与陪逛员</li>
+    </ul>
+    <h3>长期目标</h3>
+    <ul>
+      <li>成为城市线下陪伴服务入口</li>
+      <li>拓展多场景陪伴（逛街、探店、看展、运动等）</li>
+      <li>建立信任评价体系与城市社交网络</li>
+    </ul>
+  </div>
+
+  <!-- 2. 产品定位 -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span>产品定位</div>
+    <p><strong>路人社交平台 · C2C 撮合模式</strong></p>
+    <p>结伴蛙是一个连接用户与本地陪逛员的线下服务匹配撮合平台，专注于真实陪伴与城市体验，而非传统社交或导游服务。平台作为信息提供者，不直接参与服务交付。</p>
+  </div>
+
+  <!-- 3. 目标用户 -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span>目标用户 & 用户画像</div>
+    <h3>① 用户（下单方）</h3>
+    <div class="tag-grid">
+      <span class="tag">外地游客</span>
+      <span class="tag">社恐人群</span>
+      <span class="tag">刚到新城市的人</span>
+      <span class="tag">想有人一起逛街/探店/漫展的人</span>
+    </div>
+    <p><strong>用户A 画像：</strong>外地游客/本地孤独者 — 不熟悉城市，不敢随便去陌生地方，需要本地人带逛+真实体验推荐。</p>
+
+    <h3>② 陪逛员（服务提供者）</h3>
+    <div class="tag-grid">
+      <span class="tag blue">在校大学生</span>
+      <span class="tag blue">自由职业者</span>
+      <span class="tag blue">熟悉本地生活的人</span>
+      <span class="tag blue">想通过时间换收入的人</span>
+    </div>
+    <p><strong>陪逛员B 画像：</strong>本地大学生/土著（主要群体年轻化）— 兼职难找、时间碎片化，需要灵活接单、轻松赚零花钱。</p>
+  </div>
+
+  <!-- 4. 系统抽卡 - 重点模块 -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span>核心功能：系统抽卡</div>
+
+    <h3>卡片设计（参考草图）</h3>
+    <p>卡片为主要的陪逛员展示形式，用户通过左右滑动进行选择（右划=喜欢，左划=跳过）。</p>
+
+    <!-- 卡片预览 -->
+    <div class="card-preview">
+      <div class="card-header">
+        <div class="card-avatar">🐸</div>
+        <div class="card-title-block">
+          <div class="name">小鹿同学</div>
+          <div class="sub">⭐ 4.9 · 成都 · 黄金陪逛员</div>
+        </div>
+      </div>
+      <div class="card-tags">
+        <!-- 6个标签框，3行×2列 -->
+        <div class="card-tag-row">
+          <div class="card-pill yellow">逛街购物</div>
+          <div class="card-pill yellow">美食探店</div>
+        </div>
+        <div class="card-tag-row">
+          <div class="card-pill teal">本地土著</div>
+          <div class="card-pill teal">漫展达人</div>
+        </div>
+        <div class="card-tag-row">
+          <div class="card-pill teal">聊天解压</div>
+          <div class="card-pill teal">拍照技术好</div>
+        </div>
+      </div>
+      <div class="card-price">距离你 3.2km &nbsp;·&nbsp; <span>¥80</span> 元/小时</div>
+      <div class="card-actions">
+        <button class="collect">♡ 收藏</button>
+        <button class="draw">抽下一张</button>
+      </div>
+      <div class="card-nav">
+        <span>颜</span>
+        <span>行程</span>
+        <span class="active">抽卡</span>
+        <span>滤息</span>
+        <span>去</span>
+      </div>
+    </div>
+
+    <h3>卡片展示信息</h3>
+    <ul>
+      <li><strong>头像</strong>（左上）</li>
+      <li><strong>标题/昵称</strong>（右上，含评分、城市、等级标签）</li>
+      <li><strong>6个标签框</strong>（3行×2列，展示服务特色/个人标签）</li>
+      <li><strong>距离 & 每小时定价</strong>（¥XX 元/小时）</li>
+    </ul>
+
+    <h3>抽卡规则 & 用户等级限制</h3>
+    <table>
+      <tr>
+        <th>用户等级</th>
+        <th>每轮可抽张数</th>
+        <th>冷却时间</th>
+        <th>收藏上限</th>
+        <th>浏览记录</th>
+      </tr>
+      <tr>
+        <td><strong>Lv.1</strong></td>
+        <td>15 张</td>
+        <td>2 小时冷却后可继续</td>
+        <td>15 张</td>
+        <td>可查看已浏览卡片</td>
+      </tr>
+      <tr>
+        <td><strong>Lv.2</strong></td>
+        <td>40 张</td>
+        <td>30 分钟冷却后可继续</td>
+        <td>40 张</td>
+        <td>可查看已浏览卡片</td>
+      </tr>
+      <tr>
+        <td><strong>Lv.3+</strong></td>
+        <td>不限</td>
+        <td>无冷却</td>
+        <td>100 张</td>
+        <td>系统内查看完整浏览记录</td>
+      </tr>
+    </table>
+    <div class="highlight-box">
+      <strong>说明：</strong>冷却期间用户仍可查看已经浏览过的卡片，不影响已收藏内容的访问。Lv.3 及以上用户可在系统中查看自己的完整浏览历史记录。
+    </div>
+
+    <h3>筛选功能</h3>
+    <div class="tag-grid">
+      <span class="tag">性别</span>
+      <span class="tag">价格区间</span>
+      <span class="tag">评级</span>
+      <span class="tag">距离</span>
+    </div>
+  </div>
+
+  <!-- 5. 功能模块 -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span>核心功能模块</div>
+
+    <h3>🟢 5.1 用户端功能</h3>
+    <ul>
+      <li>浏览陪逛员（抽卡形式，右划喜欢/左划跳过）</li>
+      <li>筛选（性别/价格/评级/距离）</li>
+      <li>查看个人资料与评价</li>
+      <li>下单预约 & 在线支付（定金）</li>
+      <li>订单管理</li>
+      <li>评价与反馈</li>
+    </ul>
+
+    <h3>🟢 5.2 陪逛员端功能</h3>
+    <ul>
+      <li>入驻申请 & 审核</li>
+      <li>个人资料编辑（含6个标签设置）</li>
+      <li>设置服务内容与价格</li>
+      <li>接单 / 拒单</li>
+      <li>收入管理</li>
+      <li>查看用户评价</li>
+    </ul>
+
+    <h3>🟢 5.3 平台后台功能</h3>
+    <ul>
+      <li>用户审核与风控</li>
+      <li>订单管理</li>
+      <li>支付与抽佣（10%–20%）</li>
+      <li>评价体系管理</li>
+      <li>投诉处理</li>
+    </ul>
+
+    <h3>🟢 5.4 信任与安全机制</h3>
+    <div class="highlight-box red">
+      <ul>
+        <li>陪逛员实名认证</li>
+        <li>双向评价机制</li>
+        <li>行为记录</li>
+        <li><strong>紧急求助按钮</strong></li>
+        <li>黑名单机制</li>
+        <li>陪逛员定位系统（线下见面阶段）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6. 业务流程 -->
+  <div class="section">
+    <div class="section-title"><span class="num">6</span>业务流程</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>用户注册登录</strong>（手机号）</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>系统抽卡</strong>浏览陪逛员</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>选择时间 & 服务内容</strong>（聊天界面沟通）</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>支付订单</strong>（定金）</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-content"><strong>线下见面</strong>（陪逛员定位系统）</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">6</div>
+        <div class="step-content"><strong>完成服务</strong></div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">7</div>
+        <div class="step-content"><strong>双方互评</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 评级系统 -->
+  <div class="section">
+    <div class="section-title"><span class="num">7</span>核心竞争力：双向排名评级机制</div>
+
+    <h3>陪逛员等级体系</h3>
+    <div class="rank-grid">
+      <div class="rank-card rank-iron">⚫ 黑铁<small>入门级</small></div>
+      <div class="rank-card rank-silver">⚪ 白银<small>进阶级</small></div>
+      <div class="rank-card rank-gold">🥇 黄金<small>优质级</small></div>
+      <div class="rank-card rank-king">👑 王者<small>各省/直辖市 Top 6</small></div>
+    </div>
+    <ul>
+      <li>每 <strong>3个月</strong> 评级一次</li>
+      <li>王者榜单：每个省/直辖市最强前 <strong>6 名</strong></li>
+      <li>综合评分由：<strong>服务次数 + 客户打赏 + 服务好评 + 服务专业度</strong> 等构成</li>
+      <li>每月 <strong>10日、25日</strong> 刷新评价</li>
+    </ul>
+
+    <h3>定价权限（议价机制）</h3>
+    <ul>
+      <li>平台设置建议价，陪逛员自主决定最终价格</li>
+      <li>初期：允许在建议价 <strong>±25%</strong> 范围内浮动</li>
+      <li>等级越高，议价权限越大</li>
+    </ul>
+
+    <h3>用户等级体系</h3>
+    <p>用户等级 Lv.1 → Lv.5，由以下因素决定：</p>
+    <ul>
+      <li>成交次数</li>
+      <li>陪逛员打分（反向评价）</li>
+      <li>共建社区贡献</li>
+    </ul>
+    <p>等级影响：抽卡数量、冷却时间、收藏上限（详见第4章抽卡规则表）</p>
+  </div>
+
+  <!-- 8. 商业模式 -->
+  <div class="section">
+    <div class="section-title"><span class="num">8</span>商业模式</div>
+    <ul>
+      <li><strong>平台服务费</strong>：每单抽佣 10%–20%</li>
+      <li><strong>增值服务</strong>：陪逛员优先曝光（付费置顶）</li>
+      <li><strong>城市合作与品牌推广</strong></li>
+    </ul>
+  </div>
+
+  <!-- 9. 核心指标 -->
+  <div class="section">
+    <div class="section-title"><span class="num">9</span>核心指标 KPI</div>
+    <div class="kpi-grid">
+      <div class="kpi-item">
+        <div class="kpi-icon">👥</div>
+        <div class="kpi-name">DAU</div>
+        <div class="kpi-label">日活用户</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-icon">✅</div>
+        <div class="kpi-name">成单率</div>
+        <div class="kpi-label">抽卡→下单转化</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-icon">🔁</div>
+        <div class="kpi-name">复购率</div>
+        <div class="kpi-label">用户回头率</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-icon">🐸</div>
+        <div class="kpi-name">陪逛员留存</div>
+        <div class="kpi-label">服务方稳定性</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-name">用户评分</div>
+        <div class="kpi-label">满意度</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 待完善 -->
+  <div class="section">
+    <div class="section-title"><span class="num">📝</span>待补充事项（下一步讨论）</div>
+    <div class="highlight-box blue">
+      <ul>
+        <li>支付与退款规则（定金比例、尾款时机、取消政策）</li>
+        <li>陪逛员入驻审核标准与周期</li>
+        <li>冷启动方案（首批城市、种子用户获取）</li>
+        <li>竞品分析</li>
+        <li>功能优先级 P0/P1/P2 划分</li>
+        <li>数据埋点方案</li>
+        <li>违规处理运营规则</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>结伴蛙 · 让线下重逢，让温度回归</p>
+  <p class="updated">最后更新：2026-03-05 · 持续迭代中</p>
+</footer>
+
+</body>
+</html>
