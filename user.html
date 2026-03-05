@@ -767,28 +767,28 @@ body {
 }
 .btn-go {
   width:72px; height:72px;
-  background:linear-gradient(135deg,#00c851,#007E33);
+  background:linear-gradient(135deg,#ff4444,#cc0000);
   color:white;
   font-size:19px;
   font-weight:900;
   letter-spacing:1px;
   font-family:inherit;
-  box-shadow:0 6px 22px rgba(0,200,81,0.5);
+  box-shadow:0 6px 22px rgba(220,0,0,0.55);
   border-radius:50%;
 }
 
 /* ===== CENTER NAV BTN ===== */
 .nav-center-btn {
   width:58px; height:58px;
-  background:linear-gradient(145deg,#1a2a1a,#2d5a27);
+  background:linear-gradient(145deg,#3a0a0a,#8B0000);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   margin-top:-24px;
-  box-shadow:0 0 18px rgba(76,175,80,0.6), 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow:0 0 18px rgba(220,50,50,0.65), 0 4px 16px rgba(0,0,0,0.4);
   cursor:pointer;
-  border:2px solid rgba(76,175,80,0.5);
+  border:2px solid rgba(220,50,50,0.55);
 }
 </style>
 </head>
@@ -852,8 +852,10 @@ body {
     <div class="card-area" id="cardArea">
       <div class="no-more" id="noMore" style="display:none">
         <span class="no-emoji">🐸</span>
-        <span>附近没有更多搭子了</span>
-        <span style="font-size:12px;opacity:0.6">稍后再来看看吧～</span>
+        <div style="text-align:center;padding:0 28px;line-height:1.9">
+          <div id="noMoreTitle" style="font-size:14px;color:rgba(255,255,255,0.9);font-weight:600">尊敬的L1 级客户，你目前额度为每天刷新 15个蛙蛙哦，</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-top:8px">请稍等一会儿让本蛙给您刷新<br>或点击 <span style="color:#ff6b6b;font-weight:700">go</span> 下单来提升您的等级哦～</div>
+        </div>
       </div>
     </div>
     <div class="chou-actions">
@@ -938,7 +940,7 @@ body {
     </div>
     <div class="mine-section-title">设置</div>
     <div class="mine-menu">
-      <div class="menu-row" style="border-bottom:none"><span class="menu-ic">⚙</span><span class="menu-lbl">账号与设置</span><span class="menu-arr">›</span></div>
+      <div class="menu-row" style="border-bottom:none" onclick="openSettings()"><span class="menu-ic">⚙</span><span class="menu-lbl">账号与设置</span><span class="menu-arr">›</span></div>
     </div>
     <div style="height:30px"></div>
   </div>
@@ -957,21 +959,21 @@ body {
     <div class="nav-center-btn" id="nav-chou-btn">
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- back card -->
-        <rect x="12" y="3" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.25)" stroke="rgba(100,220,100,0.6)" stroke-width="0.8" transform="rotate(16 18 12)"/>
+        <rect x="12" y="3" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.25)" stroke="rgba(255,100,100,0.6)" stroke-width="0.8" transform="rotate(16 18 12)"/>
         <!-- mid card -->
-        <rect x="9" y="4" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.45)" stroke="rgba(150,240,150,0.7)" stroke-width="0.8" transform="rotate(6 15 13)"/>
+        <rect x="9" y="4" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.45)" stroke="rgba(255,150,150,0.7)" stroke-width="0.8" transform="rotate(6 15 13)"/>
         <!-- front card -->
-        <rect x="6" y="6" width="13" height="18" rx="2.5" fill="white" stroke="rgba(76,175,80,0.9)" stroke-width="1"/>
+        <rect x="6" y="6" width="13" height="18" rx="2.5" fill="white" stroke="rgba(220,50,50,0.9)" stroke-width="1"/>
         <!-- avatar circle -->
-        <circle cx="10" cy="10.5" r="2.5" fill="#4CAF50" opacity="0.8"/>
+        <circle cx="10" cy="10.5" r="2.5" fill="#E53935" opacity="0.8"/>
         <!-- info lines -->
-        <rect x="14" y="9.5" width="3.5" height="1.5" rx="0.75" fill="#4CAF50" opacity="0.6"/>
-        <rect x="14" y="12" width="2.5" height="1.2" rx="0.6" fill="rgba(76,175,80,0.4)"/>
+        <rect x="14" y="9.5" width="3.5" height="1.5" rx="0.75" fill="#E53935" opacity="0.6"/>
+        <rect x="14" y="12" width="2.5" height="1.2" rx="0.6" fill="rgba(220,50,50,0.4)"/>
         <!-- price line -->
-        <rect x="8" y="17" width="9" height="1.5" rx="0.75" fill="rgba(76,175,80,0.5)"/>
-        <rect x="8" y="20" width="6" height="1.2" rx="0.6" fill="rgba(76,175,80,0.35)"/>
+        <rect x="8" y="17" width="9" height="1.5" rx="0.75" fill="rgba(220,50,50,0.5)"/>
+        <rect x="8" y="20" width="6" height="1.2" rx="0.6" fill="rgba(220,50,50,0.35)"/>
         <!-- glow dot -->
-        <circle cx="19" cy="7" r="1.5" fill="#69f0ae" opacity="0.9"/>
+        <circle cx="19" cy="7" r="1.5" fill="#ff6b6b" opacity="0.9"/>
       </svg>
     </div>
   </div>
@@ -980,6 +982,37 @@ body {
   </div>
   <div class="nav-item" id="nav-mine" onclick="switchTab('mine')">
     <span class="ni">👤</span><span class="nl">我</span>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="chat-modal" id="settingsModal">
+  <div class="chat-hd">
+    <span class="chat-back" onclick="closeSettings()">‹</span>
+    <div class="chat-hd-info">
+      <div class="chat-hd-name">账号与设置</div>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto;background:#f5f5f5;">
+    <div style="margin-top:12px;background:white;">
+      <!-- 开发者模式 row -->
+      <div class="menu-row" onclick="toggleDevMode()" style="border-bottom:none;">
+        <span class="menu-ic">🔧</span>
+        <span class="menu-lbl">开发者模式</span>
+        <div id="devModeToggle" style="width:51px;height:31px;background:#e0e0e0;border-radius:15.5px;position:relative;transition:background 0.3s;cursor:pointer;flex-shrink:0;">
+          <div id="devModeThumb" style="width:27px;height:27px;background:white;border-radius:50%;position:absolute;top:2px;left:2px;transition:left 0.3s;box-shadow:0 2px 4px rgba(0,0,0,0.28);"></div>
+        </div>
+      </div>
+      <div id="devModeStatus" style="display:none;padding:8px 16px 14px 56px;font-size:12px;color:#4CAF50;background:white;border-top:1px solid #f5f5f5;">
+        ✅ 已切换至最高权限用户 · 每日无限刷新
+      </div>
+    </div>
+    <div style="margin-top:12px;background:white;">
+      <div class="menu-row"><span class="menu-ic">📱</span><span class="menu-lbl">手机号绑定</span><span class="menu-arr">›</span></div>
+      <div class="menu-row"><span class="menu-ic">🔒</span><span class="menu-lbl">隐私设置</span><span class="menu-arr">›</span></div>
+      <div class="menu-row" style="border-bottom:none"><span class="menu-ic">🔔</span><span class="menu-lbl">消息通知</span><span class="menu-arr">›</span></div>
+    </div>
+    <div style="padding:24px 16px 0;font-size:12px;color:#bbb;text-align:center;">结伴蛙 v1.0.0-prototype · 仅供内测使用</div>
   </div>
 </div>
 
@@ -1149,6 +1182,40 @@ let dragStartX = 0, dragCurX = 0;
 let dragCard = null;
 let currentDetailIdx = 0;
 let currentChatIdx = 0;
+let devMode = false;
+
+// ===== SETTINGS =====
+function openSettings() {
+  document.getElementById('settingsModal').classList.add('open');
+}
+function closeSettings() {
+  document.getElementById('settingsModal').classList.remove('open');
+}
+function toggleDevMode() {
+  devMode = !devMode;
+  const toggle = document.getElementById('devModeToggle');
+  const thumb = document.getElementById('devModeThumb');
+  const status = document.getElementById('devModeStatus');
+  const lvEl = document.querySelector('.mine-lv');
+  const titleEl = document.getElementById('noMoreTitle');
+  if (devMode) {
+    toggle.style.background = '#4CAF50';
+    thumb.style.left = '22px';
+    status.style.display = 'block';
+    lvEl.innerHTML = '👑 开发者 / 最高权限';
+    lvEl.style.background = 'rgba(255,215,0,0.25)';
+    lvEl.style.border = '1px solid rgba(255,215,0,0.5)';
+    if (titleEl) titleEl.textContent = '尊敬的开发者，您已获得最高权限，每日无限刷新蛙蛙哦，';
+  } else {
+    toggle.style.background = '#e0e0e0';
+    thumb.style.left = '2px';
+    status.style.display = 'none';
+    lvEl.innerHTML = '🐸 普通用户';
+    lvEl.style.background = '';
+    lvEl.style.border = '';
+    if (titleEl) titleEl.textContent = '尊敬的L1 级客户，你目前额度为每天刷新 15个蛙蛙哦，';
+  }
+}
 
 // ===== CLOCK =====
 function updateClock() {
