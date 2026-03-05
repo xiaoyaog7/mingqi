@@ -690,6 +690,106 @@ body {
 }
 .leaflet-popup-tip { background:rgba(20,20,30,0.92); }
 .leaflet-popup-content { font-size:13px; line-height:1.5; }
+
+/* ===== NEW CARD DESIGN (Bumble-style) ===== */
+.companion-card {
+  display:flex;
+  flex-direction:column;
+}
+.card-photo {
+  height:52%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  overflow:hidden;
+}
+.card-photo-emoji { font-size:80px; position:relative; z-index:1; }
+.card-photo-overlay {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:65%;
+  background:linear-gradient(transparent,rgba(0,0,0,0.78));
+  z-index:2;
+}
+.card-photo-info {
+  position:absolute;
+  bottom:12px; left:16px; right:16px;
+  color:white;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  z-index:3;
+}
+.card-body {
+  flex:1;
+  background:white;
+  padding:10px 13px 6px;
+  overflow:hidden;
+}
+.card-box {
+  border-radius:9px;
+  padding:7px 11px;
+  margin-bottom:6px;
+  font-size:11.5px;
+  line-height:1.45;
+  background:#f7f7f7;
+  color:#333;
+}
+.card-box-gold {
+  background:linear-gradient(135deg,#fff8e1,#fffde7);
+  border:1.5px solid #FFD54F;
+  color:#5D4037;
+  font-weight:600;
+}
+.card-box-dashed {
+  background:#fafafa;
+  border:1.5px dashed #bbb;
+  color:#666;
+}
+.card-price-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:4px;
+  padding:0 2px;
+}
+.card-price-new { font-size:14px; font-weight:700; color:var(--primary); }
+
+/* ===== UPDATED BUTTONS ===== */
+.btn-nope { width:54px; height:54px; background:white; }
+.btn-collect {
+  width:54px; height:54px;
+  background:#FFC107;
+  font-size:26px;
+}
+.btn-go {
+  width:72px; height:72px;
+  background:linear-gradient(135deg,#00c851,#007E33);
+  color:white;
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:1px;
+  font-family:inherit;
+  box-shadow:0 6px 22px rgba(0,200,81,0.5);
+  border-radius:50%;
+}
+
+/* ===== CENTER NAV BTN ===== */
+.nav-center-btn {
+  width:58px; height:58px;
+  background:linear-gradient(145deg,#1a2a1a,#2d5a27);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:-24px;
+  box-shadow:0 0 18px rgba(76,175,80,0.6), 0 4px 16px rgba(0,0,0,0.4);
+  cursor:pointer;
+  border:2px solid rgba(76,175,80,0.5);
+}
 </style>
 </head>
 <body>
@@ -758,8 +858,8 @@ body {
     </div>
     <div class="chou-actions">
       <button class="act-btn btn-nope" onclick="triggerSwipe('left')" title="跳过">✕</button>
-      <button class="act-btn btn-like" onclick="triggerSwipe('right')" title="喜欢">💚</button>
-      <button class="act-btn btn-star" onclick="triggerSwipe('super')" title="超级喜欢">⭐</button>
+      <button class="act-btn btn-collect" onclick="collectCard()" title="收藏">💛</button>
+      <button class="act-btn btn-go" onclick="triggerSwipe('right')" title="下单">GO!</button>
     </div>
   </div>
 
@@ -848,13 +948,32 @@ body {
 <!-- Bottom Nav -->
 <div class="bottom-nav">
   <div class="nav-item active" id="nav-guang" onclick="switchTab('guang')">
-    <span class="ni">🏠</span><span class="nl">逛</span>
+    <span class="ni">🏠</span><span class="nl">首页</span>
   </div>
   <div class="nav-item" id="nav-xingcheng" onclick="switchTab('xingcheng')">
-    <span class="ni">🗺</span><span class="nl">行程</span>
+    <span class="ni">🔥</span><span class="nl">热点</span>
   </div>
-  <div class="nav-center" onclick="switchTab('chou')">
-    <div class="nav-center-btn" id="nav-chou-btn">🃏</div>
+  <div class="nav-center" onclick="navCenterClick()">
+    <div class="nav-center-btn" id="nav-chou-btn">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- back card -->
+        <rect x="12" y="3" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.25)" stroke="rgba(100,220,100,0.6)" stroke-width="0.8" transform="rotate(16 18 12)"/>
+        <!-- mid card -->
+        <rect x="9" y="4" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.45)" stroke="rgba(150,240,150,0.7)" stroke-width="0.8" transform="rotate(6 15 13)"/>
+        <!-- front card -->
+        <rect x="6" y="6" width="13" height="18" rx="2.5" fill="white" stroke="rgba(76,175,80,0.9)" stroke-width="1"/>
+        <!-- avatar circle -->
+        <circle cx="10" cy="10.5" r="2.5" fill="#4CAF50" opacity="0.8"/>
+        <!-- info lines -->
+        <rect x="14" y="9.5" width="3.5" height="1.5" rx="0.75" fill="#4CAF50" opacity="0.6"/>
+        <rect x="14" y="12" width="2.5" height="1.2" rx="0.6" fill="rgba(76,175,80,0.4)"/>
+        <!-- price line -->
+        <rect x="8" y="17" width="9" height="1.5" rx="0.75" fill="rgba(76,175,80,0.5)"/>
+        <rect x="8" y="20" width="6" height="1.2" rx="0.6" fill="rgba(76,175,80,0.35)"/>
+        <!-- glow dot -->
+        <circle cx="19" cy="7" r="1.5" fill="#69f0ae" opacity="0.9"/>
+      </svg>
+    </div>
   </div>
   <div class="nav-item" id="nav-msg" onclick="switchTab('msg')">
     <span class="ni">💬</span><span class="nl">消息</span>
@@ -936,25 +1055,57 @@ const companions = [
     name:'林晓彤', age:23, rating:'黄金', stars:4.9, price:89,
     tags:['逛街达人','探店','漫展','上海本地'],
     bg:'linear-gradient(145deg,#667eea,#764ba2)', emoji:'👩',
-    bio:'土生土长上海人，熟悉每一条弄堂和隐藏咖啡馆。喜欢带你发现城市里被忽略的美好角落，擅长拍照构图～'
+    bio:'土生土长上海人，熟悉每一条弄堂和隐藏咖啡馆。喜欢带你发现城市里被忽略的美好角落，擅长拍照构图～',
+    boxes:[
+      '✨ 土生土长上海人，带你解锁城市最地道的隐藏玩法！拍照构图是强项，保证出片 📸',
+      '🚫 请勿要求私下联系方式 · 不接受任何言语骚扰 · 服务范围仅限平台约定地点',
+      '📍 主要活动区域：徐汇 / 静安 / 黄浦 / 长宁',
+      '⏰ 可约时段：工作日 14:00–21:00 · 周末全天可约',
+      '💼 擅长场景：探店 / 安福路闲逛 / 艺术展 / 漫展同行',
+      '📊 服务评分 4.9 · 已完成 86 单 · 好评率 100%',
+    ]
   },
   {
     name:'方悦', age:25, rating:'王者', stars:5.0, price:120,
     tags:['艺术展','高端商场','法语可交流','摄影'],
     bg:'linear-gradient(145deg,#f093fb,#f5576c)', emoji:'👩‍🎨',
-    bio:'毕业于法国留学，现居上海陆家嘴。对艺术展览、设计品牌有深入了解，带你看不一样的上海文化。'
+    bio:'毕业于法国留学，现居上海陆家嘴。对艺术展览、设计品牌有深入了解，带你看不一样的上海文化。',
+    boxes:[
+      '🎨 法国留学归来，艺术展览深度解读是我的拿手好戏，给你不一样的文化体验！',
+      '🚫 不接受临时取消（订单确认后2小时内不可退）· 禁止全程拍摄本人',
+      '📍 主要活动区域：陆家嘴 / 浦东新区 / 外滩文化带',
+      '⏰ 可约时段：周三至周日 10:00–20:00（需提前1天预约）',
+      '💼 擅长场景：当代艺术馆 / 品牌快闪 / 高端商场 / 法语交流',
+      '📊 服务评分 5.0 · 已完成 124 单 · 王者认证达人',
+    ]
   },
   {
     name:'陈雨萌', age:21, rating:'白银', stars:4.7, price:65,
     tags:['二次元','漫展','cosplay','游戏'],
     bg:'linear-gradient(145deg,#4facfe,#00f2fe)', emoji:'🧝‍♀️',
-    bio:'资深漫展达人，参加过30+次大型漫展，熟悉各类周边店。跟我出行保证超级开心，是你的氛围担当！'
+    bio:'资深漫展达人，参加过30+次大型漫展，熟悉各类周边店。跟我出行保证超级开心，是你的氛围担当！',
+    boxes:[
+      '🌟 30+ 次大型漫展经验，二次元领域全覆盖！和我出行氛围感拉满，绝对超值 ✨',
+      '🚫 不接受非二次元相关活动 · 请勿要求卸妆或改变造型 · 不提前透露个人社交账号',
+      '📍 主要活动区域：上海世博展览馆 / 徐汇 / 各大漫展场馆',
+      '⏰ 可约时段：周末全天 · 工作日 18:00 后（学业优先）',
+      '💼 擅长场景：漫展同行 / cosplay拍摄 / 动漫周边选购 / 剧本杀',
+      '📊 服务评分 4.7 · 已完成 43 单 · 新人成长迅速',
+    ]
   },
   {
     name:'苏梓琪', age:24, rating:'黄金', stars:4.8, price:95,
     tags:['网红探店','美食','下午茶','直播'],
     bg:'linear-gradient(145deg,#43e97b,#38f9d7)', emoji:'👩‍🍳',
-    bio:'美食博主，踩过上海500+家餐厅。擅长挖掘隐藏小馆子，保证每家都是真实去过、反复回访的良心推荐。'
+    bio:'美食博主，踩过上海500+家餐厅。擅长挖掘隐藏小馆子，保证每家都是真实去过、反复回访的良心推荐。',
+    boxes:[
+      '🍜 踩过上海 500+ 家餐厅的美食博主！每家都亲自去过，带你吃到真正的宝藏小店 🔥',
+      '🚫 不接受超过3小时的连续用餐安排 · 不配合商业推广拍摄 · 禁止在服务中途离场',
+      '📍 主要活动区域：全上海（重点：虹桥 / 闵行 / 静安寺商圈）',
+      '⏰ 可约时段：午餐 11:30–14:00 · 下午茶 14:30–17:00 · 晚餐 18:00–21:00',
+      '💼 擅长场景：网红餐厅探店 / 隐藏馆子挖掘 / 下午茶 / 美食打卡路线',
+      '📊 服务评分 4.8 · 已完成 97 单 · 回头客率 68%',
+    ]
   },
 ];
 
@@ -1136,19 +1287,24 @@ function renderCard(idx) {
   }
 
   card.innerHTML = `
-    <div class="card-bg" style="background:${c.bg}">${c.emoji}</div>
-    <div class="card-grad"></div>
-    <div class="card-info">
-      <div class="card-name-row">
+    <div class="card-photo" style="background:${c.bg}">
+      <span class="card-photo-emoji">${c.emoji}</span>
+      <div class="card-photo-overlay"></div>
+      <div class="card-photo-info">
         <span class="card-name">${c.name}</span>
         <span class="card-age">${c.age}岁</span>
         <span class="card-badge">${c.rating}</span>
         <span class="card-stars">⭐${c.stars}</span>
       </div>
-      <div class="card-tags">${c.tags.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
-      <div class="card-price">¥${c.price}/小时</div>
     </div>
-    <div class="stamp stamp-like">喜欢</div>
+    <div class="card-body">
+      ${c.boxes.map((b,i)=>`<div class="card-box ${i===0?'card-box-gold':i===1?'card-box-dashed':''}">${b}</div>`).join('')}
+      <div class="card-price-row">
+        <span class="card-price-new">¥${c.price}/小时</span>
+        <span style="font-size:11px;color:#aaa">蛙蛙价 · 定金¥${c.price}</span>
+      </div>
+    </div>
+    <div class="stamp stamp-like">GO!</div>
     <div class="stamp stamp-nope">跳过</div>
   `;
 
@@ -1202,6 +1358,26 @@ function setupDrag(card) {
 }
 
 function triggerSwipe(dir) { doSwipe(dir); }
+
+function navCenterClick() {
+  if (currentTab === 'chou') {
+    doSwipe('left');
+  } else {
+    switchTab('chou');
+  }
+}
+
+function collectCard() {
+  const top = document.querySelector('#cardArea .companion-card[data-top="1"]');
+  if (!top) return;
+  // Flash yellow glow
+  top.style.transition = 'box-shadow 0.15s';
+  top.style.boxShadow = '0 0 40px rgba(255,193,7,0.85), 0 12px 40px rgba(0,0,0,0.4)';
+  setTimeout(() => {
+    top.style.boxShadow = '';
+    setTimeout(() => doSwipe('right'), 150);
+  }, 280);
+}
 
 function doSwipe(dir) {
   const top = document.querySelector('#cardArea .companion-card[data-top="1"]');
