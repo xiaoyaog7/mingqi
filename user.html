@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>结伴蛙</title>
+<title>结伴蛙 · Join Frog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 :root {
@@ -777,18 +779,112 @@ body {
   border-radius:50%;
 }
 
-/* ===== CENTER NAV BTN ===== */
+/* ===== CENTER NAV BTN (orange sparkle) ===== */
 .nav-center-btn {
   width:58px; height:58px;
-  background:linear-gradient(145deg,#3a0a0a,#8B0000);
+  background:linear-gradient(145deg,#FF6B35,#E8400A);
   border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex; align-items:center; justify-content:center;
   margin-top:-24px;
-  box-shadow:0 0 18px rgba(220,50,50,0.65), 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow:0 0 18px rgba(255,107,53,0.65), 0 4px 16px rgba(0,0,0,0.3);
   cursor:pointer;
-  border:2px solid rgba(220,50,50,0.55);
+  font-size:26px;
+}
+
+/* ===== HOME PAGE (等级+收藏) ===== */
+.page-home { background:#f5f5f5; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+.home-topbar {
+  background:white; padding:16px 20px 14px;
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:1px solid #f0f0f0; flex-shrink:0;
+}
+.home-greeting { font-size:18px; font-weight:700; color:var(--text); }
+.home-body { padding:0 0 20px; }
+.home-sec { padding:14px 16px 6px; font-size:12px; font-weight:700; color:#aaa; letter-spacing:0.8px; }
+.fav-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 12px 12px;
+}
+.fav-card {
+  border-radius:16px; overflow:hidden; background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08); cursor:pointer; position:relative;
+}
+.fav-card-photo {
+  height:160px; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; font-size:64px;
+}
+.fav-card-photo img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.fav-card-body { padding:10px 10px 8px; }
+.fav-card-name { font-size:14px; font-weight:700; }
+.fav-card-sub { font-size:11px; color:var(--text-sub); margin-top:2px; }
+.fav-card-price { font-size:12px; color:var(--primary); font-weight:600; margin-top:4px; }
+.fav-remove {
+  position:absolute; top:8px; right:8px; width:24px; height:24px;
+  background:rgba(0,0,0,0.45); border-radius:50%; display:flex;
+  align-items:center; justify-content:center; font-size:12px; color:white;
+}
+.fav-empty {
+  padding:40px 20px; text-align:center; color:#bbb;
+  grid-column:1/-1;
+}
+.fav-empty .fe-ico { font-size:48px; margin-bottom:10px; }
+.fav-empty .fe-txt { font-size:14px; }
+
+/* Upgrade path card */
+.upgrade-path-card {
+  margin:0 12px 8px; background:white; border-radius:16px;
+  padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.upc-title { font-size:13px; font-weight:700; margin-bottom:10px; color:var(--text); }
+.upc-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.upc-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.upc-lbl { font-size:13px; color:var(--text); flex:1; }
+.upc-status { font-size:11px; color:#bbb; }
+.upc-status.done { color:var(--primary); }
+
+/* ===== PHOTO CARD (新版抽卡) ===== */
+.card-photo-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:top center;
+  background:#e0e0e0;
+}
+.card-photo-gradient {
+  position:absolute; bottom:0; left:0; right:0; height:65%;
+  background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+}
+.card-caption-banner {
+  position:absolute; left:16px; right:16px;
+  top:52%; transform:translateY(-50%);
+  background:rgba(198,112,100,0.88);
+  backdrop-filter:blur(4px);
+  border-radius:10px; padding:11px 16px;
+  font-size:15px; font-weight:600; color:white;
+  line-height:1.4;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+}
+.card-bottom-info {
+  position:absolute; bottom:0; left:0; right:0; padding:16px 18px 18px; color:white;
+}
+.card-name-big { font-size:28px; font-weight:800; margin-bottom:4px; }
+.card-sub-line { font-size:13px; opacity:0.85; margin-bottom:8px; }
+.card-tags-inline { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+.card-tag-pill {
+  background:rgba(255,255,255,0.18); border-radius:20px;
+  padding:3px 10px; font-size:11px;
+}
+.card-price-line { font-size:15px; font-weight:700; color:#A5D6A7; }
+
+/* Join Frog header */
+.joinfrog-header {
+  padding:14px 20px 8px; display:flex; justify-content:space-between;
+  align-items:center; flex-shrink:0; background:transparent;
+}
+.joinfrog-title {
+  font-family:'Caveat', cursive; font-size:28px; font-weight:700; color:white;
+  text-shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+.joinfrog-filter {
+  background:rgba(255,255,255,0.15); backdrop-filter:blur(8px);
+  border-radius:20px; padding:6px 14px; color:white; font-size:13px; cursor:pointer;
 }
 
 /* ===== FULL-SCREEN MODALS ===== */
@@ -945,26 +1041,49 @@ body {
 <!-- Content -->
 <div class="content-area">
 
-  <!-- ===== TAB: 逛 ===== -->
-  <div class="tab-page active page-guang" id="tab-guang">
-    <div class="guang-header">
-      <div class="guang-top">
-        <div class="guang-tabs">
-          <span class="gtab" onclick="switchGtab(this)">关注</span>
-          <span class="gtab active" onclick="switchGtab(this)">发现</span>
-          <span class="gtab" onclick="switchGtab(this)">同城</span>
+  <!-- ===== TAB: 首页（等级+收藏）===== -->
+  <div class="tab-page active page-home" id="tab-guang">
+    <div class="home-topbar">
+      <div>
+        <div class="home-greeting">早上好，明琦 👋</div>
+        <div style="font-size:12px;color:var(--text-sub);margin-top:2px">L1 基础会员 · 今日剩余 <span id="homeQuotaLeft" style="color:var(--primary);font-weight:700">20</span> 张</div>
+      </div>
+      <span style="font-size:22px;cursor:pointer" onclick="openSettings()">⚙️</span>
+    </div>
+    <div class="home-body">
+      <!-- Level card -->
+      <div style="padding:12px 12px 0">
+        <div class="level-card" id="homeLevelCard">
+          <div class="lc-name" id="homeLevelName">L1 基础会员</div>
+          <div class="lc-sub" id="homeLevelSub">成长值 0 · 完成1单+评价即升L2</div>
+          <div class="lc-perks">
+            <div class="lc-perk"><div class="lc-perk-n" id="homeQuota">20</div><div class="lc-perk-l">每日蛙蛙</div></div>
+            <div class="lc-perk"><div class="lc-perk-n">10%</div><div class="lc-perk-l">平台费率</div></div>
+            <div class="lc-perk"><div class="lc-perk-n">3</div><div class="lc-perk-l">已完成单</div></div>
+            <div class="lc-perk"><div class="lc-perk-n">4.9★</div><div class="lc-perk-l">用户评分</div></div>
+          </div>
+          <div class="upgrade-bar-wrap">
+            <div class="ubl"><span>升级 L2：完成1单+评价</span><span>0%</span></div>
+            <div class="ubb"><div class="ubf" style="width:0%"></div></div>
+          </div>
         </div>
-        <div class="guang-icons">
-          <span>🔍</span>
-          <span>📷</span>
+      </div>
+      <!-- Upgrade path -->
+      <div class="home-sec">升级路径</div>
+      <div class="upgrade-path-card">
+        <div class="upc-row"><div class="upc-dot" style="background:#4CAF50"></div><span class="upc-lbl">L1 基础会员（当前）</span><span class="upc-status done">✓ 已达到</span></div>
+        <div class="upc-row"><div class="upc-dot" style="background:#1565C0"></div><span class="upc-lbl">L2 活跃会员：完成1单+评价</span><span class="upc-status">未达到</span></div>
+        <div class="upc-row"><div class="upc-dot" style="background:#FF8F00"></div><span class="upc-lbl">L3 核心会员：2评价周期内完成6单</span><span class="upc-status">未达到</span></div>
+      </div>
+      <!-- Favorites -->
+      <div class="home-sec">我的收藏 <span id="homeFavCount" style="color:var(--primary)">0</span></div>
+      <div class="fav-grid" id="homeFavGrid">
+        <div class="fav-empty">
+          <div class="fe-ico">🐸</div>
+          <div class="fe-txt">还没有收藏的蛙蛙<br>点 💛 收藏心仪搭子</div>
         </div>
       </div>
     </div>
-    <div class="guang-scroll" style="position:relative;">
-      <div class="masonry" id="postGrid"></div>
-      <div style="height:20px"></div>
-    </div>
-    <div class="fab-publish" onclick="alert('发布内容（开发中）')">＋</div>
   </div>
 
   <!-- ===== TAB: 行程 ===== -->
@@ -987,9 +1106,9 @@ body {
 
   <!-- ===== TAB: 抽卡 ===== -->
   <div class="tab-page page-chou" id="tab-chou">
-    <div class="chou-header">
-      <span class="chou-title">找搭子</span>
-      <span class="chou-filter">🎛 筛选</span>
+    <div class="joinfrog-header">
+      <span class="joinfrog-title">Join Frog</span>
+      <span class="joinfrog-filter">🎛 筛选</span>
     </div>
     <div class="card-area" id="cardArea">
       <div class="no-more" id="noMore" style="display:none">
@@ -1095,29 +1214,10 @@ body {
     <span class="ni">🏠</span><span class="nl">首页</span>
   </div>
   <div class="nav-item" id="nav-xingcheng" onclick="switchTab('xingcheng')">
-    <span class="ni">🔥</span><span class="nl">热点</span>
+    <span class="ni">🗺</span><span class="nl">行程</span>
   </div>
   <div class="nav-center" onclick="navCenterClick()">
-    <div class="nav-center-btn" id="nav-chou-btn">
-      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- back card -->
-        <rect x="12" y="3" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.25)" stroke="rgba(255,100,100,0.6)" stroke-width="0.8" transform="rotate(16 18 12)"/>
-        <!-- mid card -->
-        <rect x="9" y="4" width="13" height="18" rx="2.5" fill="rgba(255,255,255,0.45)" stroke="rgba(255,150,150,0.7)" stroke-width="0.8" transform="rotate(6 15 13)"/>
-        <!-- front card -->
-        <rect x="6" y="6" width="13" height="18" rx="2.5" fill="white" stroke="rgba(220,50,50,0.9)" stroke-width="1"/>
-        <!-- avatar circle -->
-        <circle cx="10" cy="10.5" r="2.5" fill="#E53935" opacity="0.8"/>
-        <!-- info lines -->
-        <rect x="14" y="9.5" width="3.5" height="1.5" rx="0.75" fill="#E53935" opacity="0.6"/>
-        <rect x="14" y="12" width="2.5" height="1.2" rx="0.6" fill="rgba(220,50,50,0.4)"/>
-        <!-- price line -->
-        <rect x="8" y="17" width="9" height="1.5" rx="0.75" fill="rgba(220,50,50,0.5)"/>
-        <rect x="8" y="20" width="6" height="1.2" rx="0.6" fill="rgba(220,50,50,0.35)"/>
-        <!-- glow dot -->
-        <circle cx="19" cy="7" r="1.5" fill="#ff6b6b" opacity="0.9"/>
-      </svg>
-    </div>
+    <div class="nav-center-btn" id="nav-chou-btn">✨</div>
   </div>
   <div class="nav-item" id="nav-msg" onclick="switchTab('msg')">
     <span class="ni">💬</span><span class="nl">消息</span>
@@ -1433,6 +1533,8 @@ const companions = [
     name:'林晓彤', age:23, rating:'黄金', stars:4.9, price:89,
     tags:['逛街达人','探店','漫展','上海本地'],
     bg:'linear-gradient(145deg,#667eea,#764ba2)', emoji:'👩',
+    photo:'https://picsum.photos/seed/linxt/400/600',
+    tagline:'复旦毕业，上海土著 🏙 带你解锁城市隐藏玩法',
     bio:'土生土长上海人，熟悉每一条弄堂和隐藏咖啡馆。喜欢带你发现城市里被忽略的美好角落，擅长拍照构图～',
     boxes:[
       '✨ 土生土长上海人，带你解锁城市最地道的隐藏玩法！拍照构图是强项，保证出片 📸',
@@ -1447,6 +1549,8 @@ const companions = [
     name:'方悦', age:25, rating:'王者', stars:5.0, price:120,
     tags:['艺术展','高端商场','法语可交流','摄影'],
     bg:'linear-gradient(145deg,#f093fb,#f5576c)', emoji:'👩‍🎨',
+    photo:'https://picsum.photos/seed/fangyue/400/600',
+    tagline:'法国留学回来 🎨 艺术展览专属向导，给你文化深度体验',
     bio:'毕业于法国留学，现居上海陆家嘴。对艺术展览、设计品牌有深入了解，带你看不一样的上海文化。',
     boxes:[
       '🎨 法国留学归来，艺术展览深度解读是我的拿手好戏，给你不一样的文化体验！',
@@ -1461,6 +1565,8 @@ const companions = [
     name:'陈雨萌', age:21, rating:'白银', stars:4.7, price:65,
     tags:['二次元','漫展','cosplay','游戏'],
     bg:'linear-gradient(145deg,#4facfe,#00f2fe)', emoji:'🧝‍♀️',
+    photo:'https://picsum.photos/seed/chenyum/400/600',
+    tagline:'30+ 场漫展经验 ✨ 二次元领域全覆盖，氛围感满满',
     bio:'资深漫展达人，参加过30+次大型漫展，熟悉各类周边店。跟我出行保证超级开心，是你的氛围担当！',
     boxes:[
       '🌟 30+ 次大型漫展经验，二次元领域全覆盖！和我出行氛围感拉满，绝对超值 ✨',
@@ -1475,6 +1581,8 @@ const companions = [
     name:'苏梓琪', age:24, rating:'黄金', stars:4.8, price:95,
     tags:['网红探店','美食','下午茶','直播'],
     bg:'linear-gradient(145deg,#43e97b,#38f9d7)', emoji:'👩‍🍳',
+    photo:'https://picsum.photos/seed/suziq/400/600',
+    tagline:'踩过上海 500+ 家餐厅 🍜 每家都是真实去过的良心推荐',
     bio:'美食博主，踩过上海500+家餐厅。擅长挖掘隐藏小馆子，保证每家都是真实去过、反复回访的良心推荐。',
     boxes:[
       '🍜 踩过上海 500+ 家餐厅的美食博主！每家都亲自去过，带你吃到真正的宝藏小店 🔥',
@@ -1698,23 +1806,19 @@ function renderCard(idx) {
     card.style.zIndex = '2';
   }
 
+  // 真实照片卡片（Join Frog 风格）
   card.innerHTML = `
-    <div class="card-photo" style="background:${c.bg}">
-      <span class="card-photo-emoji">${c.emoji}</span>
-      <div class="card-photo-overlay"></div>
-      <div class="card-photo-info">
-        <span class="card-name">${c.name}</span>
-        <span class="card-age">${c.age}岁</span>
-        <span class="card-badge">${c.rating}</span>
-        <span class="card-stars">⭐${c.stars}</span>
+    <img class="card-photo-img" src="${c.photo}" alt="${c.name}"
+         onerror="this.style.display='none';this.parentElement.style.background='${c.bg}'">
+    <div class="card-photo-gradient"></div>
+    <div class="card-caption-banner">${c.tagline}</div>
+    <div class="card-bottom-info">
+      <div class="card-name-big">${c.name}，${c.age}</div>
+      <div class="card-sub-line">${c.rating} · ⭐${c.stars} · 上海</div>
+      <div class="card-tags-inline">
+        ${c.tags.slice(0,3).map(t=>`<span class="card-tag-pill">${t}</span>`).join('')}
       </div>
-    </div>
-    <div class="card-body">
-      ${c.boxes.map((b,i)=>`<div class="card-box ${i===0?'card-box-gold':i===1?'card-box-dashed':''}">${b}</div>`).join('')}
-      <div class="card-price-row">
-        <span class="card-price-new">¥${c.price}/小时</span>
-        <span style="font-size:11px;color:#aaa">蛙蛙价 · 定金¥${c.price}</span>
-      </div>
+      <div class="card-price-line">¥${c.price}/小时</div>
     </div>
     <div class="stamp stamp-like">GO!</div>
     <div class="stamp stamp-nope">跳过</div>
@@ -1779,16 +1883,57 @@ function navCenterClick() {
   }
 }
 
+// 收藏列表
+const favorites = [];
+
 function collectCard() {
   const top = document.querySelector('#cardArea .companion-card[data-top="1"]');
   if (!top) return;
-  // Flash yellow glow
+  const idx = parseInt(top.dataset.idx);
+  // 加入收藏（去重）
+  if (!favorites.includes(idx)) {
+    favorites.push(idx);
+    renderHome();
+  }
+  // Flash yellow glow + 划走
   top.style.transition = 'box-shadow 0.15s';
   top.style.boxShadow = '0 0 40px rgba(255,193,7,0.85), 0 12px 40px rgba(0,0,0,0.4)';
   setTimeout(() => {
     top.style.boxShadow = '';
-    setTimeout(() => doSwipe('right'), 150);
+    setTimeout(() => doSwipe('left'), 150); // 收藏后左滑（保留在列表，划走当前）
   }, 280);
+}
+
+function removeFavorite(idx) {
+  const i = favorites.indexOf(idx);
+  if (i > -1) { favorites.splice(i, 1); renderHome(); }
+}
+
+function renderHome() {
+  const grid = document.getElementById('homeFavGrid');
+  const countEl = document.getElementById('homeFavCount');
+  if (countEl) countEl.textContent = favorites.length;
+  if (!grid) return;
+  if (favorites.length === 0) {
+    grid.innerHTML = `<div class="fav-empty"><div class="fe-ico">🐸</div><div class="fe-txt">还没有收藏的蛙蛙<br>点 💛 收藏心仪搭子</div></div>`;
+    return;
+  }
+  grid.innerHTML = favorites.map(idx => {
+    const c = companions[idx];
+    return `<div class="fav-card" onclick="openDetail(${idx})">
+      <div class="fav-card-photo">
+        <img src="${c.photo}" alt="${c.name}" style="width:100%;height:100%;object-fit:cover;object-position:top"
+             onerror="this.parentElement.style.background='${c.bg}'">
+        <div style="position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,0.5))"></div>
+      </div>
+      <div class="fav-remove" onclick="event.stopPropagation();removeFavorite(${idx})">✕</div>
+      <div class="fav-card-body">
+        <div class="fav-card-name">${c.name}</div>
+        <div class="fav-card-sub">${c.rating} · ⭐${c.stars}</div>
+        <div class="fav-card-price">¥${c.price}/小时</div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function doSwipe(dir) {
@@ -2159,7 +2304,7 @@ function submitReview() {
 }
 
 // ===== INIT =====
-renderPosts();
+renderHome();
 renderMessages();
 initCards(); cardsReady = true;
 </script>
